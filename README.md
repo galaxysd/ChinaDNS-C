@@ -8,6 +8,23 @@ This is a port of [ChinaDNS] to C, especially for OpenWRT.
 
 If you want to fix other weird things as well, you might also want to use [ShadowVPN].
 
+v2ex
+----
+http://www.v2ex.com/t/126671
+
+ChinaDNS for OpenWRT 1.1.0 新增 chnroute 功能
+
+如果你用 chnroute 配置路由表根据 IP 是国内还是国外，决定走不走代理，在原来的方案下，国外未被污染网站也会通过本地 DNS 解析，这样解析出来的 IP 离代理服务器不一定最近，影响访问速度。
+
+新版调整了解析算法：如果是国内 DNS 解析出的 IP，确保它是国内的 IP；如果是国外 DNS 解析出的 IP，确保它是国外的 IP。
+
+这样一来，国内网站直接解析，国外网站通过代理解析，国内网站解析出的 IP 离自己最近，国外网站解析出的 IP 离代理最近。而且纯粹根据 IP 段来判断，不需要维护域名黑白名单，省时省力。
+
+其它的方案好像都没这个好用。
+
+    <=1.1.1 存在一个误判 IP 的 bug，请更新到 1.1.2 或更新版本。
+    https://sourceforge.net/projects/chinadns/files/dist/
+
 Install
 -------
 
